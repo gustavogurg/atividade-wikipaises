@@ -4,7 +4,7 @@ import babel from '@rolldown/plugin-babel'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/atividade_wikipaises/',
+  base: '/atividade-wikipaises/',
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] })

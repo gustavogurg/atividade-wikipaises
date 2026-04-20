@@ -39,20 +39,45 @@ function HomePage() {
     const endIndex = startIndex + ITEMS_PER_PAGE
     const paginatedCountries = filteredCountries.slice(startIndex, endIndex)
 
+    const pastel = {
+        pageBg: '#fef7fb',
+        panelBg: '#ffffffcc',
+        border: '#ebdff0',
+        title: '#5f3d6e',
+        text: '#66506f',
+        softText: '#7a6684',
+        cardBg: '#fffafb',
+        inputBg: '#fff7fb',
+        buttonBg: '#f6eafd',
+        buttonBorder: '#dcc5eb',
+        buttonText: '#5f3d6e',
+        shadow: '0 8px 18px rgba(126, 90, 150, 0.12)'
+    }
+
 
     return (
-        <main style={{ padding: '24px', fontFamily: 'Arial, sans-serif' }}>
-            <h1>Wiki-Países</h1>
-            <div style={{ marginBottom: '16px' }}>
+        <main style={{
+            padding: '28px',
+            fontFamily: 'Arial, sans-serif',
+            background: `linear-gradient(165deg, ${pastel.pageBg} 0%, #f9f6ff 100%)`,
+            border: `1px solid ${pastel.border}`,
+            textAlign: 'left',
+            color: pastel.text
+        }}>
+            <h1 style={{ margin: '0 0 18px', color: pastel.title, letterSpacing: '-0.5px' }}>Wiki-Países</h1>
+            <div style={{ marginBottom: '14px' }}>
                 <input
                     type="text"
                     placeholder="Buscar país"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     style={{
-                        padding: '8px',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px'
+                        padding: '10px 12px',
+                        border: `1px solid ${pastel.border}`,
+                        borderRadius: '10px',
+                        background: pastel.inputBg,
+                        color: pastel.text,
+                        minWidth: '220px'
                     }}
                 />
             </div>
@@ -61,9 +86,11 @@ function HomePage() {
                     value={region}
                     onChange={(e) => setRegion(e.target.value)}
                     style={{
-                        padding: '8px',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px'
+                        padding: '10px 12px',
+                        border: `1px solid ${pastel.border}`,
+                        borderRadius: '10px',
+                        background: pastel.inputBg,
+                        color: pastel.text
                     }}
                 >
                     <option value="">Todos os continentes</option>
@@ -74,8 +101,8 @@ function HomePage() {
                     <option value="Oceania">Oceania</option>
                 </select>
             </div>
-            <div style={{ marginTop: '16px', marginBottom: '16px', display: 'flex', gap: '10px', alignItems: 'center' }}> <button onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))} disabled={currentPage === 1} style={{ padding: '8px 12px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }} > Anterior </button>
-                <button onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))} disabled={currentPage === totalPages} style={{ padding: '8px 12px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' }} > Próximo </button>
+            <div style={{ marginTop: '16px', marginBottom: '16px', display: 'flex', gap: '10px', alignItems: 'center' }}> <button onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))} disabled={currentPage === 1} style={{ padding: '9px 14px', borderRadius: '10px', border: `1px solid ${pastel.buttonBorder}`, background: pastel.buttonBg, color: pastel.buttonText, cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }} > Anterior </button>
+                <button onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))} disabled={currentPage === totalPages} style={{ padding: '9px 14px', borderRadius: '10px', border: `1px solid ${pastel.buttonBorder}`, background: pastel.buttonBg, color: pastel.buttonText, cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' }} > Próximo </button>
             </div>
 
             {/* <ul>
@@ -85,8 +112,8 @@ function HomePage() {
             </li>
           ))}
         </ul> */}
-            {loading && <p>Carregando paises...</p>}
-            {error && <p>{error}</p>}
+            {loading && <p style={{ color: pastel.softText }}>Carregando paises...</p>}
+            {error && <p style={{ color: '#b35454' }}>{error}</p>}
 
             {!loading && !error && (
                 <section
@@ -107,10 +134,11 @@ function HomePage() {
                             <article
                                 key={country.cca3}
                                 style={{
-                                    border: '1px solid #d9d9d9',
-                                    borderRadius: '10px',
+                                    border: `1px solid ${pastel.border}`,
+                                    borderRadius: '14px',
                                     overflow: 'hidden',
-                                    background: '#fff'
+                                    background: pastel.cardBg,
+                                    boxShadow: pastel.shadow
                                 }}
                             >
                                 <img
@@ -123,20 +151,20 @@ function HomePage() {
                                     }}
                                 />
 
-                                <div style={{ padding: '12px' }}>
-                                    <h2 style={{ margin: '0 0 8px', fontSize: '18px', color: '#333', fontWeight: 'bold' }}>
+                                <div style={{ padding: '14px' }}>
+                                    <h2 style={{ margin: '0 0 10px', fontSize: '18px', color: pastel.title, fontWeight: 'bold' }}>
                                         {country.name.common}
                                     </h2>
 
-                                    <p style={{ margin: '0 0 6px' }}>
+                                    <p style={{ margin: '0 0 6px', color: pastel.text }}>
                                         Capital: {country.capital}
                                     </p>
 
-                                    <p style={{ margin: '0 0 6px' }}>
+                                    <p style={{ margin: '0 0 6px', color: pastel.text }}>
                                         Regiao: {country.region}
                                     </p>
 
-                                    <p style={{ margin: 0 }}>
+                                    <p style={{ margin: 0, color: pastel.softText, fontWeight: 600 }}>
                                         Populacao: {formatPopulation(country.population)}
                                     </p>
                                 </div>
@@ -160,19 +188,19 @@ function HomePage() {
                 <button
                     onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
                     disabled={currentPage === 1}
-                    style={{ padding: '8px 12px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}
+                    style={{ padding: '9px 14px', borderRadius: '10px', border: `1px solid ${pastel.buttonBorder}`, background: pastel.buttonBg, color: pastel.buttonText, cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}
                 >
                     Anterior
                 </button>
 
-                <span style={{ fontWeight: 600 }}>
+                <span style={{ fontWeight: 600, color: pastel.title }}>
                     Pagina {currentPage} de {totalPages}
                 </span>
 
                 <button
                     onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
                     disabled={currentPage === totalPages}
-                    style={{ padding: '8px 12px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' }}
+                    style={{ padding: '9px 14px', borderRadius: '10px', border: `1px solid ${pastel.buttonBorder}`, background: pastel.buttonBg, color: pastel.buttonText, cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' }}
                 >
                     Proximo
                 </button>
