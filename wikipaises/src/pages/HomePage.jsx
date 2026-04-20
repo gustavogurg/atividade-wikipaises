@@ -70,8 +70,8 @@ function HomePage() {
                             }}
                         >
                             <img
-                                src={country.flags?.png}
-                                alt={'Bandeira de ' + (country.name?.common || 'pais')}
+                                src={country.flags.png}
+                                alt={'Bandeira de ' + (country.name)}
                                 style={{
                                     width: '100%',
                                     height: '140px',
@@ -81,15 +81,15 @@ function HomePage() {
 
                             <div style={{ padding: '12px' }}>
                                 <h2 style={{ margin: '0 0 8px', fontSize: '18px', color: '#333', fontWeight: 'bold' }}>
-                                    {country.name?.common || 'Sem nome'}
+                                    {country.name}
                                 </h2>
 
                                 <p style={{ margin: '0 0 6px' }}>
-                                    Capital: {country.capital?.[0] || 'N/A'}
+                                    Capital: {country.capital}
                                 </p>
 
                                 <p style={{ margin: '0 0 6px' }}>
-                                    Regiao: {country.region || 'N/A'}
+                                    Regiao: {country.region}
                                 </p>
 
                                 <p style={{ margin: 0 }}>
